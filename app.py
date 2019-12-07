@@ -8,9 +8,9 @@ mongo = PyMongo(app)
 
 
 @app.route('/')
-def main():
-    return render_template("base.html")
-
+@app.route('/show_all')
+def show_all():
+    return render_template("queue.html", customers=mongo.db.customers.find(), payouts=list(mongo.db.payouts.find()))
 
 @app.route('/new_request')
 def new_request():

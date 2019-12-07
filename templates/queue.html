@@ -1,0 +1,52 @@
+{% extends 'base.html' %} {% block content %}
+<h3>Queued Requests</h3>
+<div class="row">
+    <ul class="collapsible popout">
+        {% for customer in customers %}
+        <li>
+            <div class="collapsible-header">
+                <div class="col s11">
+                    <i class="material-icons">account_circle</i>
+                    <strong>{{customer.recipient_name}} ({{customer.country}})</strong>
+                </div>
+                <div class="col s1">
+                    <a class="tooltipped" data-position="left" data-tooltip="Add another payout">
+                        <i class="material-icons">add_circle_outline</i>
+                    </a>
+                </div>
+            </div>
+            <div class="collapsible-body">
+                <ul class="collapsible">
+                    {% for payout in payouts %}
+                    {% if customer._id == payout.customer_id %}
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">vpn_key</i><strong>MTCN:
+                                {{payout.mtcn}}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Amount: ${{payout.amount_sent}}
+                            USD</strong></div>
+                        <div class="collapsible-body">
+                            <div class="row">
+                                <div class="col s10">
+                                    <span><strong>Reason to cancel:</strong> {{payout.reason_to_cancel}}<br>
+                                        <strong>Date Sent:</strong> {{payout.sent_date}}</span>
+                                </div>
+                                <div class="col s2">
+                                    <a class="tooltipped" data-position="left" data-tooltip="Edit this payout">
+                                        <i class="material-icons">edit</i>
+                                    </a>
+                                    <a class="tooltipped" data-position="left" data-tooltip="Delete this payout">
+                                        <i class="material-icons">delete</i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}
