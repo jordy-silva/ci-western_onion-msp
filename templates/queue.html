@@ -10,7 +10,7 @@
                     <strong>{{customer.recipient_name}} ({{customer.country}})</strong>
                 </div>
                 <div class="col s1">
-                    <a class="tooltipped" data-position="left" data-tooltip="Add another payout">
+                    <a href="{{url_for('add_payout', customer_id=customer._id)}}"  class="tooltipped" data-position="left" data-tooltip="Add another payout">
                         <i class="material-icons">add_circle_outline</i>
                     </a>
                 </div>

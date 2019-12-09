@@ -2,11 +2,16 @@
 <h3>New Cancel Request</h3>
 <div class="row">
     <form action="{{ url_for('create_records') }}" method="POST" class="col s12">
-        <input type="hidden" id="customer_id" name="customer_id" value="">
+        <input type="hidden" id="customer_id" name="customer_id" value="{{customer._id}}">
         <div class="row">
             <div class="input-field col s12">
                 <i class="material-icons prefix">account_circle</i>
+                {% if customer %}
+                <input id="recipient_name" name="recipient_name" type="text" value="{{customer.recipient_name}}"
+                    disabled required>
+                {% else %}
                 <input id="recipient_name" name="recipient_name" type="text" required>
+                {% endif%}
                 <label for="recipient_name">Recipient Name</label>
             </div>
         </div>
@@ -14,11 +19,15 @@
         <div class="row">
             <div class="input-field col s12">
                 <i class="material-icons prefix">language</i>
-                <select id="country" name="country" required>
-                    <option value="" disabled selected>Choose destination country</option>
-                    <option value="Italy">Italy</option>
-                </select>
-                <label for="country">Country</label>
+                    {% if customer%}
+                    <input id="country" name="country" type="text" value="{{customer.country}}" disabled required>
+                    {% else %}
+                    <select id="country" name="country" required>
+                        <option value="" disabled selected>Choose destination country</option>
+                        <option value="Italy">Italy</option>
+                    </select>
+                    {% endif%}
+                    <label for="country">Country</label>
             </div>
         </div>
 

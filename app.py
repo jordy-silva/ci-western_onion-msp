@@ -1,6 +1,7 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for
 from flask_pymongo import PyMongo
+from bson.objectid import ObjectId
 
 app = Flask(__name__)
 app.config["MONGO_URI"] = os.getenv('MONGO_URI', 'mongodb://localhost')
@@ -12,9 +13,15 @@ mongo = PyMongo(app)
 def show_all():
     return render_template("queue.html", customers=mongo.db.customers.find(), payouts=list(mongo.db.payouts.find()))
 
+
 @app.route('/new_request')
 def new_request():
-    return render_template("new_request.html")
+    return render_template("new_request.html", customer="")
+
+
+@app.route('/add_payout/<customer_id>')
+def add_payout(customer_id):
+    return render_template("new_request.html", customer=mongo.db.customers.find_one({"_id": ObjectId(customer_id)}))
 
 
 @app.route('/create_records', methods=['POST'])
@@ -25,19 +32,23 @@ def create_records():
         # If data is about customer we add it to the customer dict
         if key == "recipient_name" or key == "country":
             customer[key] = value
-        # Otherwise we add it to the payout dict    
+        if key == "customer_id":
+            if value:
+                payout[key] = ObjectId(value)
+        # Otherwise we add it to the payout dict
         else:
             payout[key] = value
-    #If data doesn't contain the customer_id it means customer it's not in the database and we need to insert it         
+    # If data doesn't contain the customer_id it means customer it's not in the database and we need to insert it
     if request.form.get("customer_id") == "":
-        #Insert document with customer information
+        # Insert document with customer information
         insert = mongo.db.customers.insert_one(customer)
-        #And we set the customer_id in the payout record
+        # And we set the customer_id in the payout record
         payout["customer_id"] = insert.inserted_id
-    #Insert document with payout information
+    # Insert document with payout information
     mongo.db.payouts.insert_one(payout)
-    return redirect(url_for('new_request'))
-    
+    return redirect(url_for('show_all'))
+
+
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
