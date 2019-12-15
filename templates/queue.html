@@ -10,7 +10,7 @@
                     <strong>{{customer.recipient_name}} ({{customer.country}})</strong>
                 </div>
                 <div class="col s1">
-                    <a href="{{url_for('add_payout', customer_id=customer._id)}}"  class="tooltipped" data-position="left" data-tooltip="Add another payout">
+                    <a href="{{url_for('add_payout', customer_id=customer._id)}}" class="tooltipped" data-position="left" data-tooltip="Add another payout">
                         <i class="material-icons">add_circle_outline</i>
                     </a>
                 </div>
@@ -30,10 +30,10 @@
                                         <strong>Date Sent:</strong> {{payout.sent_date}}</span>
                                 </div>
                                 <div class="col s2">
-                                    <a class="tooltipped" data-position="left" data-tooltip="Edit this payout">
+                                    <a href="{{url_for('edit_payout', customer_id=customer._id, payout_id=payout._id)}}" class="tooltipped" data-position="left" data-tooltip="Edit this payout">
                                         <i class="material-icons">edit</i>
                                     </a>
-                                    <a class="tooltipped" data-position="left" data-tooltip="Delete this payout">
+                                    <a href="{{url_for('delete_payout', customer_id=customer._id, payout_id=payout._id)}}" class="tooltipped" data-position="left" data-tooltip="Delete this payout">
                                         <i class="material-icons">delete</i>
                                     </a>
                                 </div>

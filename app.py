@@ -16,12 +16,16 @@ def show_all():
 
 @app.route('/new_request')
 def new_request():
-    return render_template("new_request.html", customer="")
+    return render_template("payout.html", customer="")
 
 
 @app.route('/add_payout/<customer_id>')
 def add_payout(customer_id):
-    return render_template("new_request.html", customer=mongo.db.customers.find_one({"_id": ObjectId(customer_id)}))
+    return render_template("payout.html", action="add", customer=mongo.db.customers.find_one({"_id": ObjectId(customer_id)}))
+
+@app.route('/edit_payout/<customer_id>/<payout_id>')
+def edit_payout(customer_id, payout_id):
+    return render_template("payout.html", action="edit", customer=mongo.db.customers.find_one({"_id": ObjectId(customer_id)}), payout=mongo.db.payouts.find_one({"_id": ObjectId(payout_id)}))
 
 
 @app.route('/create_records', methods=['POST'])
@@ -42,10 +46,33 @@ def create_records():
     if request.form.get("customer_id") == "":
         # Insert document with customer information
         insert = mongo.db.customers.insert_one(customer)
-        # And we set the customer_id in the payout record
+        # And we add the customer_id in the payout dictionary
         payout["customer_id"] = insert.inserted_id
     # Insert document with payout information
     mongo.db.payouts.insert_one(payout)
+    return redirect(url_for('show_all'))
+
+@app.route('/update_records', methods=['POST'])
+def update_records():
+    customer = {}  # Create a new empty dictionary for customer data
+    payout = {}  # Create a new empty dictionary for payout data
+    for key, value in request.form.items():
+        # If data is about customer we add it to the customer dict
+        if key == "recipient_name" or key == "country":
+            customer[key] = value
+        else:
+            if key != "customer_id" and key != "payout_id":
+                payout[key] = value
+    # If data doesn't contain the customer_id it means customer it's not in the database and we need to insert it
+    mongo.db.customers.update_one({"_id": ObjectId(request.form['customer_id'])}, {"$set": customer})
+    mongo.db.payouts.update_one({"_id": ObjectId(request.form['payout_id'])}, {"$set": payout})
+    return redirect(url_for('show_all'))
+
+@app.route('/delete_payout/<customer_id>/<payout_id>')
+def delete_payout(customer_id, payout_id):
+    mongo.db.payouts.remove({'_id': ObjectId(payout_id)})
+    if not mongo.db.payouts.find_one({"customer_id": ObjectId(customer_id)}):
+        mongo.db.customers.remove({'_id': ObjectId(customer_id)})
     return redirect(url_for('show_all'))
 
 
