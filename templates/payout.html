@@ -1,8 +1,5 @@
 {% extends 'base.html' %} {% block content %}
 <h3>New Cancel Request</h3>
-{% print(customer) %}<br>
-{% print(payout) %}<br>
-{% print(action) %}<br>
 <div class="row">
     {% if action == "edit" %}
     <form action="{{ url_for('update_records') }}" method="POST" class="col s12">
@@ -17,11 +14,9 @@
             <div class="input-field col s12">
                 <i class="material-icons prefix">account_circle</i>
                 {% if action == "add" %}
-                <input id="recipient_name" name="recipient_name" type="text" value="{{customer.recipient_name}}"
-                    disabled required>
+                <input id="recipient_name" name="recipient_name" type="text" value="{{customer.recipient_name}}" disabled required>
                 {% elif action == "edit" %}
-                <input id="recipient_name" name="recipient_name" type="text" value="{{customer.recipient_name}}"
-                    required>
+                <input id="recipient_name" name="recipient_name" type="text" value="{{customer.recipient_name}}" required>
                 {% else %}
                 <input id="recipient_name" name="recipient_name" type="text" required>
                 {% endif%}
