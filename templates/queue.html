@@ -1,40 +1,40 @@
 {% extends 'base.html' %} {% block content %}
-<h4>Queued Requests</h4>
+<h4>Cancel Queue</h4>
 <div class="row">
     <ul class="collapsible popout">
         {% for customer in customers %}
         <li>
             <div class="collapsible-header">
                 <div class="col s11">
-                    <i class="material-icons">account_circle</i>
+                    <i class="material-icons teal-text text-darken-3">account_circle</i>
                     <strong>{{customer.recipient_name}} ({{customer.country}})</strong>
                 </div>
                 <div class="col s1">
                     <a href="{{url_for('add_payout', customer_id=customer._id)}}" class="tooltipped" data-position="left" data-tooltip="Add another payout">
-                        <i class="material-icons">add_circle_outline</i>
+                        <i class="material-icons teal-text text-darken-1">add_circle_outline</i>
                     </a>
                 </div>
             </div>
-            <div class="collapsible-body">
-                <ul class="collapsible">
+            <div class="collapsible-body mtcn-collap">
+                <ul class="collapsible mtcn-collap">
                     {% for payout in payouts %}
                     {% if customer._id == payout.customer_id %}
                     <li>
-                        <div class="collapsible-header"><i class="material-icons">vpn_key</i><strong>MTCN:
+                        <div class="collapsible-header"><i class="material-icons teal-text text-darken-3">vpn_key</i><strong>MTCN:
                                 {{payout.mtcn}}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Amount: ${{payout.amount_sent}}
                             USD</strong></div>
-                        <div class="collapsible-body">
+                        <div class="collapsible-body mtcn-detail-collap">
                             <div class="row">
                                 <div class="col s10">
                                     <span><strong>Reason to cancel:</strong> {{payout.reason_to_cancel}}<br>
                                         <strong>Date Sent:</strong> {{payout.sent_date}}</span>
                                 </div>
-                                <div class="col s2">
-                                    <a href="{{url_for('edit_payout', customer_id=customer._id, payout_id=payout._id)}}" class="tooltipped" data-position="left" data-tooltip="Edit this payout">
-                                        <i class="material-icons">edit</i>
+                                <div class="col s2 right-align">
+                                    <a href="{{url_for('edit_payout', customer_id=customer._id, payout_id=payout._id)}}" class="tooltipped mtcn-btn" data-position="left" data-tooltip="Edit this payout">
+                                        <i class="material-icons teal-text text-darken-1">edit</i>
                                     </a>
-                                    <a href="{{url_for('delete_payout', customer_id=customer._id, payout_id=payout._id)}}" class="tooltipped" data-position="left" data-tooltip="Delete this payout">
-                                        <i class="material-icons">delete</i>
+                                    <a href="{{url_for('delete_payout', customer_id=customer._id, payout_id=payout._id)}}" class="tooltipped mtcn-btn" data-position="left" data-tooltip="Delete this payout">
+                                        <i class="material-icons teal-text text-darken-1">delete</i>
                                     </a>
                                 </div>
                             </div>

@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu:400,500&display=swap');
+
+/* ---------------------------------------------------
+    GLOBAL
+----------------------------------------------------- */
+body {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.mtcn-collap {
+    padding: 0.5rem;
+    margin: 0;
+}
+
+.mtcn-detail-collap {
+    padding: 1rem;
+}
+
+.mtcn-btn {
+    padding-left: 10px;
+}
+
+/* ---------------------------------------------------
+    Media Queries
+----------------------------------------------------- */
+
+@media(min-width: 993px) {
+    .logo-custom {
+        padding-left: 20px !important;
+    }
+}

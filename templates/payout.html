@@ -12,7 +12,7 @@
         {% endif %}
         <div class="row">
             <div class="input-field col s12">
-                <i class="material-icons prefix">account_circle</i>
+                <i class="material-icons prefix teal-text text-darken-3">account_circle</i>
                 {% if action == "add" %}
                 <input id="recipient_name" name="recipient_name" type="text" value="{{customer.recipient_name}}" disabled required>
                 {% elif action == "edit" %}
@@ -26,7 +26,7 @@
 
         <div class="row">
             <div class="input-field col s12">
-                <i class="material-icons prefix">language</i>
+                <i class="material-icons prefix teal-text text-darken-3">language</i>
                 {% if action == "add" %}
                 <input id="country" name="country" type="text" value="{{customer.country}}" disabled required>
                 {% else %}
@@ -46,7 +46,7 @@
 
         <div class="row">
             <div class="input-field col s12">
-                <i class="material-icons prefix">vpn_key</i>
+                <i class="material-icons prefix teal-text text-darken-3">vpn_key</i>
                 {% if action == "edit" %}
                 <input id="mtcn" name="mtcn" type="text" value="{{payout.mtcn}}" required>
                 {% else %}
@@ -58,7 +58,7 @@
 
         <div class="row">
             <div class="input-field col s12">
-                <i class="material-icons prefix">attach_money</i>
+                <i class="material-icons prefix teal-text text-darken-3">attach_money</i>
                 {% if action == "edit" %}
                 <input id="amount_sent" name="amount_sent" type="text" value="{{payout.amount_sent}}" required>
                 {% else %}
@@ -70,7 +70,7 @@
 
         <div class="row">
             <div class="input-field col s12">
-                <i class="material-icons prefix">cancel</i>
+                <i class="material-icons prefix teal-text text-darken-3">cancel</i>
                 <select id="reason_to_cancel" name="reason_to_cancel" required>
                     <option value="" disabled selected>Choose Reason to Cancel</option>
                     <option value="1">Incorrect Name</option>
@@ -81,7 +81,7 @@
 
         <div class="row">
             <div class="input-field col s12">
-                <i class="material-icons prefix">today</i>
+                <i class="material-icons prefix teal-text text-darken-3">today</i>
                 {% if action == "edit" %}
                 <input id="sent_date" name="sent_date" type="text" class="datepicker" value="{{payout.sent_date}}" required>
                 {% else %}
@@ -92,8 +92,8 @@
         </div>
 
         <div class="row">
-            <button class="btn waves-effect waves-light" type="submit">Add
-                <i class="material-icons left">add_circle_outline</i>
+            <button class="btn waves-effect waves-light" type="submit">Save
+                <i class="material-icons left">save</i>
             </button>
         </div>
     </form>

@@ -9,25 +9,27 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Materialize Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <title>Western Onion</title>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" type="text/css" />
+    <title>WesternOnion</title>
 </head>
 
 <body>
     <nav>
-        <div class="nav-wrapper">
-            <a href="#!" class="brand-logo"><i class="material-icons">spa</i>Western Onion</a>
+        <div class="nav-wrapper teal">
+            <a href="#!" class="brand-logo logo-custom"><i class="material-icons">spa</i>WesternOnion</a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
                 <li><a href="{{url_for('show_all')}}">Queue</a></li>
-                <li><a href="{{url_for('new_request')}}">New Request</a></li>
+                <li><a href="{{url_for('new_request')}}">New Cancel Request</a></li>
                 <li><a href="#">Generate Report</a></li>
             </ul>
         </div>
     </nav>
 
-    <ul class="sidenav" id="mobile-demo">
+    <ul class="sidenav teal lighten-4" id="mobile-demo">
         <li><a href="{{url_for('show_all')}}">Queue</a></li>
-        <li><a href="{{url_for('new_request')}}">New Request</a></li>
+        <li><a href="{{url_for('new_request')}}">New Cancel Request</a></li>
         <li><a href="#">Generate Report</a></li>
     </ul>
 
