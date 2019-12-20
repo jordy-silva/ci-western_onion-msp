@@ -72,8 +72,16 @@
             <div class="input-field col s12">
                 <i class="material-icons prefix teal-text text-darken-3">cancel</i>
                 <select id="reason_to_cancel" name="reason_to_cancel" required>
-                    <option value="" disabled selected>Choose Reason to Cancel</option>
-                    <option value="1">Incorrect Name</option>
+                    {% if action == "edit" %}
+                    <option value="{{payout.reason_to_cancel}}" selected>{{payout.reason_to_cancel}}</option>
+                    {% else %}
+                    <option value="" selected disabled>Choose Reason to Cancel</option>
+                    {% endif %}
+                    {% for reason in reasons %}
+                        {% if reason.name != payout.reason_to_cancel%}
+                        <option value="{{reason.name}}">{{reason.name}}</option>
+                        {% endif %}
+                    {% endfor %}
                 </select>
                 <label for="reason_to_cancel">Reason to Cancel</label>
             </div>

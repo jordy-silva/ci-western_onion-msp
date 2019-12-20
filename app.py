@@ -16,17 +16,17 @@ def show_all():
 
 @app.route('/new_request')
 def new_request():
-    return render_template("payout.html", customer="")
+    return render_template("payout.html", customer="", payout="", reasons=mongo.db.reasons.find())
 
 
 @app.route('/add_payout/<customer_id>')
 def add_payout(customer_id):
-    return render_template("payout.html", action="add", customer=mongo.db.customers.find_one({"_id": ObjectId(customer_id)}))
+    return render_template("payout.html", action="add", customer=mongo.db.customers.find_one({"_id": ObjectId(customer_id)}), payout="", reasons=mongo.db.reasons.find())
 
 
 @app.route('/edit_payout/<customer_id>/<payout_id>')
 def edit_payout(customer_id, payout_id):
-    return render_template("payout.html", action="edit", customer=mongo.db.customers.find_one({"_id": ObjectId(customer_id)}), payout=mongo.db.payouts.find_one({"_id": ObjectId(payout_id)}))
+    return render_template("payout.html", action="edit", customer=mongo.db.customers.find_one({"_id": ObjectId(customer_id)}), payout=mongo.db.payouts.find_one({"_id": ObjectId(payout_id)}), reasons=mongo.db.reasons.find())
 
 
 @app.route('/create_records', methods=['POST'])
