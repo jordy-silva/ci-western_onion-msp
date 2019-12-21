@@ -43,6 +43,16 @@
     <script type="text/javascript">
         M.AutoInit();
     </script>
+    <!-- Show toast with feedback messages for the user -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <script type="text/javascript">
+        M.toast({ html: '{{ message }}', classes: 'rounded' });
+    </script>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
 </body>
 
 </html>
