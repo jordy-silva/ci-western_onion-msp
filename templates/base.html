@@ -24,8 +24,8 @@
 <body>
     <nav>
         <div class="nav-wrapper teal">
-            <a href="#!" class="brand-logo logo-custom"><i class="material-icons">spa</i>WesternOnion</a>
-            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <a href="{{url_for('show_all')}}" class="brand-logo logo-custom"><i class="material-icons">spa</i>WesternOnion</a>
+            <a href="{{url_for('show_all')}}" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
                 <li><a href="{{url_for('show_all')}}">Queue</a></li>
                 <li><a href="{{url_for('new_request')}}">New Cancel Request</a></li>

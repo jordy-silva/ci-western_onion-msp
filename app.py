@@ -21,10 +21,10 @@ def show_all():
 @app.route('/new_request')
 def new_request():
     try:
-        return render_template("payout.html", customer="", payout="", reasons=mongo.db.reasons.find())
+        return render_template("payout.html", customer="", payout="", reasons=mongo.db.reasons.find(), countries=mongo.db.countries.find())
     except:
-        flash('Unable to load reasons')
-        return render_template("payout.html", customer="", payout="", reasons="")
+        flash('Unable to load reasons or countries')
+        return render_template("payout.html", customer="", payout="", reasons="", countries="")
 
 
 @app.route('/add_payout/<customer_id>')
@@ -39,7 +39,7 @@ def add_payout(customer_id):
 @app.route('/edit_payout/<customer_id>/<payout_id>')
 def edit_payout(customer_id, payout_id):
     try:
-        return render_template("payout.html", action="edit", customer=mongo.db.customers.find_one({"_id": ObjectId(customer_id)}), payout=mongo.db.payouts.find_one({"_id": ObjectId(payout_id)}), reasons=mongo.db.reasons.find())
+        return render_template("payout.html", action="edit", customer=mongo.db.customers.find_one({"_id": ObjectId(customer_id)}), payout=mongo.db.payouts.find_one({"_id": ObjectId(payout_id)}), reasons=mongo.db.reasons.find(), countries=mongo.db.countries.find())
     except:
         flash('Unable to load data')
         return redirect(url_for('show_all'))
