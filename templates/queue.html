@@ -10,7 +10,8 @@
                     <strong>{{customer.recipient_name}} ({{customer.country}})</strong>
                 </div>
                 <div class="col s1">
-                    <a href="{{url_for('add_payout', customer_id=customer._id)}}" class="tooltipped" data-position="left" data-tooltip="Add another payout">
+                    <a href="{{url_for('add_payout', customer_id=customer._id)}}" class="tooltipped"
+                        data-position="left" data-tooltip="Add another payout">
                         <i class="material-icons teal-text text-darken-1">add_circle_outline</i>
                     </a>
                 </div>
@@ -20,7 +21,8 @@
                     {% for payout in payouts %}
                     {% if customer._id == payout.customer_id %}
                     <li>
-                        <div class="collapsible-header"><i class="material-icons teal-text text-darken-3">vpn_key</i><strong>MTCN:
+                        <div class="collapsible-header"><i
+                                class="material-icons teal-text text-darken-3">vpn_key</i><strong>MTCN:
                                 {{payout.mtcn}}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Amount: ${{payout.amount_sent}}
                             USD</strong></div>
                         <div class="collapsible-body mtcn-detail-collap">
@@ -30,10 +32,14 @@
                                         <strong>Date Sent:</strong> {{payout.sent_date}}</span>
                                 </div>
                                 <div class="col s2 right-align">
-                                    <a href="{{url_for('edit_payout', customer_id=customer._id, payout_id=payout._id)}}" class="tooltipped mtcn-btn" data-position="left" data-tooltip="Edit this payout">
+                                    <a href="{{url_for('edit_payout', customer_id=customer._id, payout_id=payout._id)}}"
+                                        class="tooltipped mtcn-btn" data-position="left"
+                                        data-tooltip="Edit this payout">
                                         <i class="material-icons teal-text text-darken-1">edit</i>
                                     </a>
-                                    <a href="{{url_for('delete_payout', customer_id=customer._id, payout_id=payout._id)}}" class="tooltipped mtcn-btn" data-position="left" data-tooltip="Delete this payout">
+                                    <a href="{{url_for('delete_payout', customer_id=customer._id, payout_id=payout._id)}}"
+                                        class="tooltipped mtcn-btn" data-position="left"
+                                        data-tooltip="Delete this payout">
                                         <i class="material-icons teal-text text-darken-1">delete</i>
                                     </a>
                                 </div>
@@ -47,6 +53,56 @@
         </li>
         {% endfor %}
     </ul>
+</div>
+
+<!-- Modal Structure -->
+<div id="modal_wu_email" class="modal">
+    <div class="modal-content row">
+        <div class="col s12">
+            <p class="center-align amber-text"><i class="material-icons large">warning</i></p>
+            <p class="center-align">This will send an email requesting to action the payouts in the cancellation queue
+                and then <strong>it will empty the queue</strong></p>
+        </div>
+        <div class="center-align col s12">
+            <form action="{{ url_for('delete_all') }}" onsubmit="return sendMail(this);" method="POST">
+                <textarea id="email_body" class="hide">
+                        <p>Hi Western Union,</p>
+                        <p>Please proceed to cancel the following payments as per the reasons stated and reply back to us with the
+                            status of the request.</p>
+                        <p>------------------------------------<br>
+                            {% for customer in customers %}
+                            <strong>Name: </strong>{{customer.recipient_name}}<br>
+                            <strong>Country: </strong>{{customer.country}}<br><br>
+                                {% for payout in payouts %}
+                                    {% if customer._id == payout.customer_id %}
+                                    <strong>MTCN: </strong>{{payout.mtcn}}<br>
+                                    <strong>Amount: </strong>${{payout.amount_sent}} USD<br>
+                                    <strong>Date sent: </strong>{{payout.sent_date}}<br>
+                                    <strong>Reason to Cancel: </strong>{{payout.reason_to_cancel}}<br><br>
+                                    {% endif %}
+                                {% endfor %}
+                                ------------------------------------<br>
+                            {% endfor %}
+                        </p>
+                        <p>Best Regards,<br>OnGaming Customer Service Team</p>
+                </textarea>
+                <div class="row center-align valign-wrapper">
+                    <div class="col s2">
+                        <i id="email_activity" class="material-icons btn-floating teal">email</i>
+                    </div>
+                    <div class="input-field col s8">
+                        <input id="report_email" type="email" class="validate" required>
+                        <label for="report_email">Send report by email to:</label>
+                    </div>
+                    <div class="col s2">
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Send
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 {% endblock %}

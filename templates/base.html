@@ -11,6 +11,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" type="text/css" />
+    <!-- EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2.3.2/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+            emailjs.init("user_txvSArlNww6qAmWFVaOsM");
+        })();
+    </script>
     <title>WesternOnion</title>
 </head>
 
@@ -22,7 +29,7 @@
             <ul class="right hide-on-med-and-down">
                 <li><a href="{{url_for('show_all')}}">Queue</a></li>
                 <li><a href="{{url_for('new_request')}}">New Cancel Request</a></li>
-                <li><a href="#">Generate Report</a></li>
+                <li><a href="#modal_wu_email" class="modal-trigger">Generate Report</a></li>
             </ul>
         </div>
     </nav>
@@ -30,7 +37,7 @@
     <ul class="sidenav teal lighten-4" id="mobile-demo">
         <li><a href="{{url_for('show_all')}}">Queue</a></li>
         <li><a href="{{url_for('new_request')}}">New Cancel Request</a></li>
-        <li><a href="#">Generate Report</a></li>
+        <li><a href="#modal_wu_email" class="modal-trigger">Generate Report</a></li>
     </ul>
 
     <div class="container">
@@ -39,10 +46,12 @@
 
     <!-- Materialize Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    
     <!-- Initialize all Materialize components-->
     <script type="text/javascript">
         M.AutoInit();
     </script>
+    
     <!-- Show toast with feedback messages for the user -->
     {% with messages = get_flashed_messages() %}
     {% if messages %}
@@ -53,6 +62,11 @@
     {% endfor %}
     {% endif %}
     {% endwith %}
+    
+    <!-- Send Email JS -->
+    <script src="{{url_for('static', filename='js/sendEmail.js')}}">
+    </script>
+
 </body>
 
 </html>

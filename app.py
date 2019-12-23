@@ -2,6 +2,7 @@ import os
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
+from datetime import datetime
 
 app = Flask(__name__)
 app.config["MONGO_URI"] = os.getenv('MONGO_URI', 'mongodb://localhost')
@@ -9,11 +10,10 @@ mongo = PyMongo(app)
 app.secret_key = 'qJunUwiYfq2tQsCBaJJ3dg3'
 
 
-@app.route('/')
 @app.route('/show_all')
 def show_all():
     try:
-        return render_template("queue.html", customers=mongo.db.customers.find(), payouts=list(mongo.db.payouts.find()))
+        return render_template("queue.html", customers=list(mongo.db.customers.find()), payouts=list(mongo.db.payouts.find()))
     except:
         return render_template("error.html")
 
@@ -117,6 +117,21 @@ def delete_payout(customer_id, payout_id):
         if not mongo.db.payouts.find_one({"customer_id": ObjectId(customer_id)}):
             mongo.db.customers.remove({'_id': ObjectId(customer_id)})
             flash('Recipient deleted')
+    except:
+        flash('Could NOT delete')
+    finally:
+        return redirect(url_for('show_all'))
+
+@app.route('/delete_all', methods=['POST'])
+def delete_all():
+    flash('Email Sent')
+    try:
+        # Deletion of all payouts
+        mongo.db.payouts.delete_many({})
+        flash('ALL payouts deleted')
+        # Deletion of all customers
+        mongo.db.customers.delete_many({})
+        flash('ALL customers deleted')
     except:
         flash('Could NOT delete')
     finally:
