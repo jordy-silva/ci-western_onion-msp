@@ -82,6 +82,32 @@ This site is hosted using GitHub pages, deployed directly from the master branch
 In order for the app to be functional you need to have an Asana account (free) and setup your **Asana Personal Access Token** and **Target Asana project ID** in the app.
 
 ### Deployment steps:
+#On Heroku
+1. click `New` > `Create new app`
+2. Enter a name for your app on Heroku, select region and click `Create app`
+#On Terminal
+3. Create `requirements.txt` file by typing in your terminal in the project root directory:
+```
+pip3 freeze --local > requirements.txt
+````
+4. Create a file `Procfile` with content:
+```
+web: python app.py
+```
+5. type `heroku login` and follow the instructions to log into Heroku
+6. Add to Git your heroku app remote:
+````
+heroku git:remote -a [enter_your_heroku_app_name_from_step_2]
+```
+7. Stage `Procfile`and `requirements.txt` and then commit
+8. Push to Heroku:
+```
+git push heroku master
+```
+
+
+
+
 1. In the GitHub repository page, click **Settings**
 2. Scroll down to the section **GitHub Pages**
 3. Select from the dropdown the branch to publish. Usually **master branch**

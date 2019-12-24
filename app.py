@@ -9,7 +9,7 @@ app.config["MONGO_URI"] = os.getenv('MONGO_URI', 'mongodb://localhost')
 mongo = PyMongo(app)
 app.secret_key = 'qJunUwiYfq2tQsCBaJJ3dg3'
 
-
+@app.route('/')
 @app.route('/show_all')
 def show_all():
     try:
