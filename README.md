@@ -4,11 +4,11 @@ Milestone Project - Data Centric Development - Code Institute
 
 **FOR EDUCATIONAL PURPOSE ONLY**
 
-The customer is the Customer Support department of an online gaming company. Company's users can make money participating on online gaming competitions. Those gains are added to their virtual wallets and, at the user's request, sent to the user via Western Union.
+The customer is the Customer Support department of an online gaming company. Company's users can make money participating in online gaming competitions. Those gains are added to their virtual wallets and, at the user's request, sent to the user via Western Union.
 
-For different reasons a user may find difficulties cashing out the money sent via Western Union and needs to contact the company's Customer Support department for assistance. Front line agents handle communication with the end user and collect all details of the payout that was sent via Western Union. Then they fill in an spreadsheet with the payout details. Once per day a Manager collects all the payouts information in the spreadsheet and composes an email that is then sent to Western Union for processing.
+For different reasons a user may experience difficulties cashing out the money sent via Western Union and needs to contact the company's Customer Support department for assistance. Front line agents handle communication with the end user and collect all details of the payout that was sent via Western Union. Then they fill in a spreadsheet with the payout details. Once per day a Manager collects all the payout's information in the spreadsheet and composes an email that is then sent to Western Union for processing.
 
-The Customer Support department request is to create a web based app to handle the collection and management of the information by the customer support agents and automate the generation and sending of the email to Western Union.
+The customer's request is to create a web based app to handle the collection and management of the information by the customer support agents and automate the generation and sending of the email to Western Union.
 
 The app will be named WesternOnion in reference to the payments provider.
  
@@ -16,16 +16,16 @@ The app will be named WesternOnion in reference to the payments provider.
 ### User Stories
 
 - As agent, I want to be able to add multiple payouts to a single customer, so I don't need to input repeated information
-    - **Feature:** Add button next to each customer record
+    - **Feature:** *'+'* button next to each customer record.
 
 - As agent, I want to be able to remove payouts added, so we don't waste resources if action is no needed anymore
-    - **Feature:** Delete button next to each payout. If last payout removed it also removes the record of the customer
+    - **Feature:** *'Delete'* button next to each payout. If the last payout is removed, the record of the customer is also removed.
 
 - As agent, I want to be able to edit payouts added, so we don't need to delete and add again all information if a mistake is made
-    - **Feature:** Edit button next to each payout.
+    - **Feature:** *'Edit'* button next to each payout.
 
-- As manager, I want to be able to easily generate the email to WU, so I don't need to waste time by doing lots of copy and paste.
-    - **Feature:** "Generate email" button
+- As manager, I want to be able to easily generate the email to Western Union, so I don't need to waste time by doing lots of copy pasting.
+    - **Feature:** *'Generate email'* option.
 
 - As manager, I want everyone to know the information has been sent to WU, so we are all in the loop
     - **Feature:** Once the WU email has been generated all records are deleted
@@ -65,7 +65,7 @@ This could be achieved by implementing OAuth 2.0 authentication or some other ty
 The site has been tested in multiple browsers Chrome & Safari in MacOS and Chrome on Android 10 phones to ensure compatibility and responsiveness.
 
 The following manual tests have been carried out:
-- Make mongoDB inaccesible and attempt all webapp functionalities that require a mongoDB call
+- Make mongoDB inaccessible and attempt all webapp functionalities that require a mongoDB call
 - Take the network down and attempt to send a report by email
 - Submit form without all the fields filled
 - Add new beneficiary and payout
