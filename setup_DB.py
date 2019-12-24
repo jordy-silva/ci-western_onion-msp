@@ -10,3 +10,13 @@ countriesList = [{"country_code":"AD","country_name":"Andorra"}, {"country_code"
 
 # Create the countries collection in mongoDB
 mongo.db.countries.insert_many(countriesList)
+
+reasonsList = [
+    {"name":"Cancellation of MTCN/Recall"},
+    {"name":"Expired MTCN"},
+    {"name":"Incorrect Name"},
+    {"name":"Status clarification"}
+]
+
+# Create the reasons collection in mongoDB
+mongo.db.reasons.insert_many(reasonsList)

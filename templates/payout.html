@@ -63,9 +63,9 @@
             <div class="input-field col s12">
                 <i class="material-icons prefix teal-text text-darken-3">attach_money</i>
                 {% if action == "edit" %}
-                <input id="amount_sent" name="amount_sent" type="number" value="{{payout.amount_sent}}" required>
+                <input id="amount_sent" name="amount_sent" type="number" step="0.01" value="{{payout.amount_sent}}" required>
                 {% else %}
-                <input id="amount_sent" name="amount_sent" type="number" required>
+                <input id="amount_sent" name="amount_sent" type="number" step="0.01" required>
                 {% endif %}
                 <label for="amount_sent">Amount Sent</label>
             </div>

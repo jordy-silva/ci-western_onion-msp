@@ -21,10 +21,10 @@
                     {% for payout in payouts %}
                     {% if customer._id == payout.customer_id %}
                     <li>
-                        <div class="collapsible-header"><i
-                                class="material-icons teal-text text-darken-3">vpn_key</i><strong>MTCN:
-                                {{payout.mtcn}}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Amount: ${{payout.amount_sent}}
-                            USD</strong></div>
+                        <div class="collapsible-header">
+                            <i class="material-icons teal-text text-darken-3">vpn_key</i>
+                            <strong>MTCN: {{payout.mtcn}}</strong>&nbsp;/ Amount: ${{payout.amount_sent}} USD
+                        </div>
                         <div class="collapsible-body mtcn-detail-collap">
                             <div class="row">
                                 <div class="col s10">
