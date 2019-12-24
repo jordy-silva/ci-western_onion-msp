@@ -53,7 +53,7 @@ def create_records():
         # If data is about customer we add it to the customer dict
         if key == "recipient_name" or key == "country":
             customer[key] = value
-        if key == "customer_id":
+        elif key == "customer_id":
             if value:
                 payout[key] = ObjectId(value)
         # Otherwise we add it to the payout dict
