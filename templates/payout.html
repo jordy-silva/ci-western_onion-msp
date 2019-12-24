@@ -51,9 +51,9 @@
             <div class="input-field col s12">
                 <i class="material-icons prefix teal-text text-darken-3">vpn_key</i>
                 {% if action == "edit" %}
-                <input id="mtcn" name="mtcn" type="text" value="{{payout.mtcn}}" required>
+                <input id="mtcn" name="mtcn" type="number" value="{{payout.mtcn}}" required>
                 {% else %}
-                <input id="mtcn" name="mtcn" type="text" required>
+                <input id="mtcn" name="mtcn" type="number" required>
                 {% endif %}
                 <label for="mtcn">MTCN</label>
             </div>
@@ -63,9 +63,9 @@
             <div class="input-field col s12">
                 <i class="material-icons prefix teal-text text-darken-3">attach_money</i>
                 {% if action == "edit" %}
-                <input id="amount_sent" name="amount_sent" type="text" value="{{payout.amount_sent}}" required>
+                <input id="amount_sent" name="amount_sent" type="number" value="{{payout.amount_sent}}" required>
                 {% else %}
-                <input id="amount_sent" name="amount_sent" type="text" required>
+                <input id="amount_sent" name="amount_sent" type="number" required>
                 {% endif %}
                 <label for="amount_sent">Amount Sent</label>
             </div>
